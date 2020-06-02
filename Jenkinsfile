@@ -1,7 +1,6 @@
 pipeline {
 
-    agent { dockerfile true }
-
+    agent any
     stages { 
 
       
@@ -9,7 +8,7 @@ pipeline {
 
             steps {
 
-             sh 'docker-build -t fake-backend-jenkins ./fake-backend'
+             sh 'docker  build -t fake-backend-jenkins ./fake-backend'
             }
         }
         stage('Test') {
