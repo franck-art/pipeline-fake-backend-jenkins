@@ -19,12 +19,6 @@ pipeline {
 	        sh 'if [ "$(curl -X GET http://172.31.65.182:80/health)" = "ok" ] ; then echo "test OK";exit 0;  else echo "test KO" ;exit 1; fi'
             }
         }
-        stage('Clean') {
-           
-            steps {
-            sh 'docker-compose down -d'
-            }
-        }
         stage('Tag') {
 
             
@@ -41,6 +35,14 @@ pipeline {
             sh 'docker push $DOCKER_LOGIN/fake-backend-jenkins:pipeline_tag'
             }
         }
+       stage('Clean') {
+
+            steps {
+            sh 'docker-compose down '
+            }
+        }
+
+        
     }
 }
 
