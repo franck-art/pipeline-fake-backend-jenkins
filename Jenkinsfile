@@ -1,17 +1,11 @@
 pipeline {
 
-    agent none 
+    agent { dockerfile true }
 
     stages { 
 
       
         stage('Build') {
-
-         agent {
-    dockerfile {
-          filename "fake-backend/Dockerfile"
-        }
-     }
 
             steps {
 
