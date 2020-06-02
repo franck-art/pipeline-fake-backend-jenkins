@@ -1,6 +1,13 @@
 pipeline {
 
     agent any
+
+   environment{
+
+    dockerhub_cred = credentials('dockerhub_key')
+
+  }
+
     stages { 
 
       
@@ -24,8 +31,8 @@ pipeline {
             
                    
             steps {
-             sh 'docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD'
-            sh 'docker tag fake-backend-jenkins $DOCKER_LOGIN/fake-backend-jenkins:pipeline_tag'
+             sh 'docker login -u $dockerhub_cred_USR -p $dockerhub_cred_PSW'
+            sh 'docker tag fake-backend-jenkins $dockerhub_cred_USR/fake-backend-jenkins:pipeline_tag'
             }
         
         }
@@ -34,7 +41,7 @@ pipeline {
            
             when { branch 'master' }
             steps {
-            sh 'docker push $DOCKER_LOGIN/fake-backend-jenkins:pipeline_tag'
+            sh 'docker push $dockerhub_cred_USR/fake-backend-jenkins:pipeline_tag'
             }
         }
        stage('Clean') {
