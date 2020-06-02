@@ -1,3 +1,4 @@
-# Continuous Integretion Fake-backend/Battleboat with JenkinsCI
+# Continuous Integretion Fake-backend/Battleboat with Jenkins-Pipeline
 
-[![Build Status](http://34.204.179.129:8080/buildStatus/icon?job=fake-backend-jenkins_CI)](http://34.204.179.129:8080/job/fake-backend-jenkins_CI/)
+[![Build Status](http://35.168.36.107:8080/buildStatus/icon?job=pipeline)](http://35.168.36.107:8080/job/pipeline/)
+
