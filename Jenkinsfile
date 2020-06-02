@@ -1,6 +1,6 @@
 pipeline {
 
-    dockerfile {
+   agent  dockerfile {
           filename "fake-backend/Dockerfile"
         }
 
