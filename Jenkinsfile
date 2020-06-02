@@ -22,17 +22,19 @@ pipeline {
         stage('Tag') {
 
             
-           
+             withCredentials ([string ( credentialsId:  'dockerhub_key' , variable:  'DOCKER_PASSWORD' )]){         
             steps {
-             sh 'docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD'
-            sh 'docker tag fake-backend-jenkins $DOCKER_LOGIN/fake-backend-jenkins:pipeline_tag'
+             sh 'docker login -u franckjunior -p $DOCKER_PASSWORD'
+            sh 'docker tag fake-backend-jenkins franckjunior/fake-backend-jenkins:pipeline_tag'
             }
         }
+        }
+
          stage('Push') {
            
             when { branch 'master' }
             steps {
-            sh 'docker push $DOCKER_LOGIN/fake-backend-jenkins:pipeline_tag'
+            sh 'docker push franckjunior/fake-backend-jenkins:pipeline_tag'
             }
         }
        stage('Clean') {
