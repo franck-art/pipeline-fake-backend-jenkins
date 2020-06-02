@@ -1,6 +1,9 @@
 pipeline {
     agent any
     stages {
+ 
+
+   
         stage('Build') {
             steps {
 
@@ -11,7 +14,7 @@ pipeline {
            
             steps {
                 sh 'docker-compose up -d'
-				sh 'if [ "$(curl -X GET http://172.31.69.4:80/health)" = "ok" ] ; then echo "test OK";exit 0;  else echo "test KO" ;exit 1; fi'
+				sh 'if [ "$(curl -X GET http://172.31.65.182:80/health)" = "ok" ] ; then echo "test OK";exit 0;  else echo "test KO" ;exit 1; fi'
             }
         }
         stage('Clean') {
@@ -21,6 +24,8 @@ pipeline {
             }
         }
         stage('Tag') {
+
+            
            
             steps {
              sh 'docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD'
@@ -29,6 +34,7 @@ pipeline {
         }
          stage('Push') {
            
+            when { branch 'master' }
             steps {
             sh 'docker push $DOCKER_LOGIN/fake-backend-jenkins:pipeline_tag'
             }
