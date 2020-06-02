@@ -15,7 +15,8 @@ pipeline {
            
             steps {
                 sh 'docker-compose up -d'
-				sh 'if [ "$(curl -X GET http://172.31.65.182:80/health)" = "ok" ] ; then echo "test OK";exit 0;  else echo "test KO" ;exit 1; fi'
+                sh ' sleep 10s'
+	        sh 'if [ "$(curl -X GET http://172.31.65.182:80/health)" = "ok" ] ; then echo "test OK";exit 0;  else echo "test KO" ;exit 1; fi'
             }
         }
         stage('Clean') {
